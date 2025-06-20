@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "mdmaker"
+version = "0.0.1"
+description = "A simple Python API for programmatically creating Markdown files"
+authors = ["oyr13824761386@outlook.com>"]
+license = "GPL-3.0"
+readme = "README.md"
+# 如果想发布到 PyPI 并自动包含整个 mdmaker/ 目录：
+packages = [
+  { include = "mdmaker" }
+]
+
+[tool.poetry.dependencies]
+python = ">=3.7,<4.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.0"
+
+# 如果后续添加 CLI（比如在 mdmaker/cli.py 里定义了 `def main(): ...`），
+# 去掉下面这段的注释，并确保 cli.py 中有对应的入口函数。
+#
+#[tool.poetry.scripts]
+#mdmaker = "mdmaker.cli:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
