@@ -1,18 +1,39 @@
-[tool.poetry]
-name = "mdmaker"
-version = "0.0.2"
-description = "A simple Python API for programmatically creating Markdown files"
-authors = ["Rui <oyr13824761386@outlook.com>"]
-license = "GPL-3.0"
-readme = "README.md"
-packages = [{ include = "mdmaker" }]
+name: Build and Release
 
-[tool.poetry.dependencies]
-python = ">=3.7,<4.0"
+on:
+  push:
+    tags:
+      - 'v*'  # 如 v0.0.2，会触发构建流程
 
-[tool.poetry.group.dev.dependencies]
-pytest = "^7.0"
+jobs:
+  release-build:
+    runs-on: ubuntu-latest
 
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'  # 你项目支持 Python 3.7+，这里用较新版本构建
+
+      - name: Install build tool
+        run: |
+          python -m pip install --upgrade pip
+          pip install build
+
+      - name: 🧪 Debug: Show working directory structure
+        run: |
+          echo "Working directory: $(pwd)"
+          ls -R
+
+      - name: Build package (sdist & wheel)
+        run: python -m build
+
+      # ✅ 如果以后要发布到 PyPI，取消下面这段注释并设置 PyPI_TOKEN Secret
+      #
+      # - name: Publish to PyPI
+      #   uses: pypa/gh-action-pypi-publish@release/v1
+      #   with:
+      #     password: ${{ secrets.PYPI_TOKEN }}
