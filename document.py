@@ -11,7 +11,7 @@ def enbt(s):
     """
     match = re.match(r'(\d+)\.', s)
     if match:
-        return match.group(1)
+        return int(match.group(1))
     return None
 
 class MdDocument():
@@ -27,7 +27,7 @@ class MdDocument():
         :param path: The path where the document will be saved.
         """
         self.path = path
-    def save(self, path: str = ",/output/document.md"):
+    def save(self, path: str = "./output/document.md"):
         """
         Generates the Markdown document and saves it to the specified path.
         :param path: The path where the document will be saved.
@@ -39,7 +39,8 @@ class MdDocument():
                 raise ValueError("Path must be specified")
         with open(path, 'w', encoding='utf-8') as f:
             f.write('\n'.join(self.commands))
-    #---------- ----------
+        print(f"mdmaker: Document saved to {path}")
+    #----------init ending----------
     def headings(self, text: str, level: int = 1):
         """
         Adds a heading to the document.
@@ -63,9 +64,12 @@ class MdDocument():
         """
         Starts an ordered list.
         """
-        if num != 1 and self.commands[len(-1)] != (num-1):
+        if num == 1 or enbt(self.commands[-1])+1 == num:
+            self.commands.append(f"{num}. {items}")
+        else:
+            print(self.commands)
             raise ValueError("Ordered list must be sequential")
-        self.commands.append(f"{num}. {items}")
+
     def inline_code(self, code: str):
         """
         Adds inline code to the document.
