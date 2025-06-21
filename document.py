@@ -27,7 +27,7 @@ class MdDocument():
         :param path: The path where the document will be saved.
         """
         self.path = path
-    def make_md(self, path: str = ",/output/document.md"):
+    def save(self, path: str = ",/output/document.md"):
         """
         Generates the Markdown document and saves it to the specified path.
         :param path: The path where the document will be saved.
@@ -54,18 +54,18 @@ class MdDocument():
         Adds a paragraph to the document.
         """
         self.commands.append(text)
-    def unordered_list(self, text: str):
+    def unordered_list(self, items: str):
         """
         Starts an unordered list.
         """
-        self.commands.append(f"- {text}")
-    def ordered_list(self, num: int, text: str):
+        self.commands.append(f"- {items}")
+    def ordered_list(self, num: int, items: str):
         """
         Starts an ordered list.
         """
         if num != 1 and self.commands[len(-1)] != (num-1):
             raise ValueError("Ordered list must be sequential")
-        self.commands.append(f"{num}. {text}")
+        self.commands.append(f"{num}. {items}")
     def inline_code(self, code: str):
         """
         Adds inline code to the document.
