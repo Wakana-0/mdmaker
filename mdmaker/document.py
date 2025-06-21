@@ -1,5 +1,7 @@
 """This module handles Markdown document generation."""
 import re
+import os
+from pathlib import Path
 
 __VERSION__ = "0.0.2"
 __LICENSE__ = "GPL-3.0"
@@ -37,6 +39,8 @@ class MdDocument():
                 path = self.path
             else:
                 raise ValueError("Path must be specified")
+
+        os.makedirs(os.path.dirname(path), exist_ok=True)
         with open(path, 'w', encoding='utf-8') as f:
             f.write('\n'.join(self.commands))
         print(f"mdmaker: Document saved to {path}")

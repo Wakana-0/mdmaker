@@ -1,4 +1,4 @@
-from document import MdDocument
+from mdmaker import MdDocument
 
 md = MdDocument()
 md.set_path("output/document.md")
