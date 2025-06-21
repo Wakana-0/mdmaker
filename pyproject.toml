@@ -1,14 +1,10 @@
 [tool.poetry]
 name = "mdmaker"
-version = "0.0.1"
+version = "0.0.2"
 description = "A simple Python API for programmatically creating Markdown files"
 authors = ["Rui <oyr13824761386@outlook.com>"]
 license = "GPL-3.0"
 readme = "README.md"
-# 如果想发布到 PyPI 并自动包含整个 mdmaker/ 目录：
-packages = [
-  { include = "mdmaker" }
-]
 
 [tool.poetry.dependencies]
 python = ">=3.7,<4.0"

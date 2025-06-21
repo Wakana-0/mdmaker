@@ -1,7 +1,7 @@
 """This module handles Markdown document generation."""
 import re
 
-__VERSION__ = "0.0.1"
+__VERSION__ = "0.0.2"
 __LICENSE__ = "GPL-3.0"
 
 
